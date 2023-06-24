@@ -25,4 +25,9 @@ public class Payment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "source_account_id", nullable = false)
     private BankAccount sourceAccount;
+
+    @OneToOne
+    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
+    private Transaction transaction;
+
 }

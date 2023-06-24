@@ -43,5 +43,4 @@ public class Transaction {
     @JoinColumn(name = "destination_account_id")
     private BankAccount destinationAccount;
 
-
 }

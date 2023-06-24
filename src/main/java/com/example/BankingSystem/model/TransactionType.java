@@ -4,7 +4,7 @@ public enum TransactionType {
     DEPOSIT("Deposit"),
     WITHDRAWAL("Withdrawal"),
     TRANSFER("Transfer"),
-    PAYMENT("Payment");
+    BILLING("Billing");
 
     private final String description;
 
