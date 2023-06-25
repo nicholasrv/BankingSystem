@@ -3,11 +3,13 @@ package com.example.BankingSystem.service.impl;
 import com.example.BankingSystem.model.UserEntity;
 import com.example.BankingSystem.repository.UserRepository;
 import com.example.BankingSystem.service.BankingSystem;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserService implements BankingSystem<UserEntity> {
 
     private final UserRepository userRepository;

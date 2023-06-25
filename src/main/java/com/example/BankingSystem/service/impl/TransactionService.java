@@ -5,11 +5,13 @@ import com.example.BankingSystem.model.UserEntity;
 import com.example.BankingSystem.repository.TransactionRepository;
 import com.example.BankingSystem.repository.UserRepository;
 import com.example.BankingSystem.service.BankingSystem;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TransactionService implements BankingSystem<Transaction> {
     private final TransactionRepository transactionRepository;
 

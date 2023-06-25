@@ -26,8 +26,13 @@ public class Payment {
     @JoinColumn(name = "source_account_id", nullable = false)
     private BankAccount sourceAccount;
 
-    @OneToOne
-    @JoinColumn(name = "transaction_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "payment")
+    @JoinColumn(name = "transaction_id")
     private Transaction transaction;
 
+    public Payment(String billNumber, BankAccount sourceAccount, Transaction transaction) {
+        this.billNumber = billNumber;
+        this.sourceAccount = sourceAccount;
+        this.transaction = transaction;
+    }
 }

@@ -16,6 +16,9 @@ public class PaymentResponseDTO {
     private BankAccount bankAccount;
     private Transaction transaction;
 
-    public PaymentResponseDTO(String billNumber, BankAccountDTO bankAccountDTO, TransactionBillingDTO transactionDTO) {
+    public PaymentResponseDTO(String billNumber, BankAccountDTO bankAccountDTO, TransactionBillingDTO transactionBillingDTO) {
+    }
+
+    public void setMessage(String s) {
     }
 }

@@ -4,11 +4,13 @@ import com.example.BankingSystem.model.Payment;
 import com.example.BankingSystem.repository.PaymentRepository;
 import com.example.BankingSystem.service.BankingSystem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PaymentService implements BankingSystem<Payment> {
 
     @Autowired
@@ -48,5 +50,9 @@ public class PaymentService implements BankingSystem<Payment> {
             return true;
         }
         return false;
+    }
+
+    public boolean existsPaymentByBillNumber(String billNumber) {
+        return paymentRepository.existsPaymentByBillNumber(billNumber);
     }
 }

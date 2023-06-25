@@ -4,11 +4,13 @@ import com.example.BankingSystem.model.BankAccount;
 import com.example.BankingSystem.model.Transaction;
 import com.example.BankingSystem.repository.BankAccountRepository;
 import com.example.BankingSystem.service.BankingSystem;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BankAccountService implements BankingSystem<BankAccount> {
 
     private final BankAccountRepository bankAccountRepository;

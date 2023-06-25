@@ -9,12 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentDTO {
-
-    private String billNumber;
-
+public class PaymentTransferDTO {
     private Double amount;
 
     private Long idAccount;
-
 }
