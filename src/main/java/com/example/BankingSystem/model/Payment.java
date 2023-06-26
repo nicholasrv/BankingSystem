@@ -1,5 +1,6 @@
 package com.example.BankingSystem.model;
 
+import com.example.BankingSystem.dtos.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String billNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,4 +36,28 @@ public class Payment {
         this.sourceAccount = sourceAccount;
         this.transaction = transaction;
     }
+
+    public PaymentResponseDTO responseBillingDTO(){
+        TransactionBillingDTO transactionBillingDTO = new TransactionBillingDTO(this.transaction.getAmount(), this.transaction.getTransactionDate(), this.transaction.getType());
+        BankAccountDTO bankAccountDTO = new BankAccountDTO(this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType());
+
+        return new PaymentResponseDTO(
+                this.billNumber,
+                transactionBillingDTO,
+                bankAccountDTO
+        );
+    }
+
+    public PaymentTransferResponseDTO responseTransferDTO(){
+        TransactionTransferDTO transactionTransferDTO = new TransactionTransferDTO(this.transaction.getAmount(), this.transaction.getTransactionDate(), this.transaction.getType());
+        BankAccountDTO sourceAccount = new BankAccountDTO(this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType());
+        BankAccountDTO destinationAccount = new BankAccountDTO(this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType());
+
+        return new PaymentTransferResponseDTO(
+                transactionTransferDTO,
+                sourceAccount,
+                destinationAccount
+        );
+    }
+
 }

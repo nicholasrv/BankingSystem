@@ -22,7 +22,4 @@ public class TransactionBillingDTO {
 
     private TransactionType type;
 
-    private Long idSourceAccount;
-
-
 }

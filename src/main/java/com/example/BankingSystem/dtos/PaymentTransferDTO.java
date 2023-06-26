@@ -12,5 +12,7 @@ import lombok.Setter;
 public class PaymentTransferDTO {
     private Double amount;
 
-    private Long idAccount;
+    private Long idSourceAccount;
+
+    private Long idDestinationAccount;
 }

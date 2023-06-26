@@ -21,8 +21,5 @@ public class TransactionTransferDTO {
 
     private TransactionType type;
 
-    private Long idSourceAccount;
-
-    private Long idDestinationAccount;
 
 }

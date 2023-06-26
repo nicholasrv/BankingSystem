@@ -10,13 +10,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PaymentResponseDTO {
-
-    private String billNumber;
+@AllArgsConstructor
+public class PaymentTransferResponseDTO {
     private Transaction transaction;
-    private BankAccount account;
+    private BankAccount sourceAccount;
+    private BankAccount destinationAccount;
 
-        public PaymentResponseDTO(String billNumber, TransactionBillingDTO transactionBillingDTO, BankAccountDTO bankAccountDTO) {
-        }
+    public PaymentTransferResponseDTO(TransactionTransferDTO transactionTransferDTO, BankAccountDTO sourceAccount, BankAccountDTO destinationAccount) {
+    }
 
 }
