@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Getter
@@ -39,4 +40,26 @@ public class BankAccount {
         this.user = user;
         this.accountType = accountType;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        BankAccount other = (BankAccount) obj;
+        return Objects.equals(id, other.id)
+                && Objects.equals(accountNumber, other.accountNumber)
+                && Objects.equals(balance, other.balance)
+                && Objects.equals(user, other.user)
+                && accountType == other.accountType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, accountNumber, balance, user, accountType);
+    }
+
 }
