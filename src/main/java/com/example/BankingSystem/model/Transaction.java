@@ -35,11 +35,11 @@ public class Transaction {
     @Column(nullable = false)
     private TransactionType type;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "source_account_id")
     private BankAccount sourceAccount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "destination_account_id")
     private BankAccount destinationAccount;
 

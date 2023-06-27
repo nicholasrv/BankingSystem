@@ -52,4 +52,8 @@ public class BankAccountService implements BankingSystem<BankAccount> {
         }
         return false;
     }
+
+    public boolean existsBankAccountByAccountNumber(String accountNumber) {
+        return bankAccountRepository.existsBankAccountByAccountNumber(accountNumber);
+    }
 }

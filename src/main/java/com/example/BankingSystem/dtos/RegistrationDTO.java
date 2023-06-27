@@ -9,9 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankAccountDTO {
-    private String accountNumber;
-    private Double balance;
-    private String accountType;
-    private Long idUser;
+public class RegistrationDTO {
+
+    private String name;
+    private String email;
+    private String username;
+    private String password;
+
 }
+

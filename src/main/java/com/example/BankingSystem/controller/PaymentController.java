@@ -113,7 +113,7 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.update(payment));
     }
 
-    @RequestMapping(value = "/payments", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/values", method = RequestMethod.GET, produces = "application/json")
     public List<Payment> getAllPayments() throws SQLException {
         return paymentService.getAllResults();
     }
