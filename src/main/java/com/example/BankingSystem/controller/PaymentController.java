@@ -15,7 +15,6 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
 import java.sql.SQLException;
@@ -71,6 +70,57 @@ public class PaymentController {
 
         // Returns the response body
         return payment.responseBillingDTO();
+    }
+
+    @PostMapping("/deposit/save")
+    @Transactional
+    public ResponseEntity<BankAccount> makeADeposit(@RequestBody DepositDTO depositDTO) throws SQLException, BadRequestException{
+
+
+        // Get the bank account
+        BankAccount bankAccount = bankAccountService.searchById(depositDTO.getIdAcc()).orElse(null);
+
+        // Create the Transaction object and sets all it's params/values
+        Transaction transaction = new Transaction();
+        transaction.setAmount(depositDTO.getAmount());
+        transaction.setTransactionDate(LocalDateTime.now());
+        transaction.setType(TransactionType.DEPOSIT);
+        transaction.setSourceAccount(bankAccount);
+
+        // Process and persist the transaction onto the database
+        transaction = transactionService.save(transaction);
+
+        // Subtract the bank account's balance for the transaction amount, and then update the account's balance afterwards
+        bankAccount.setBalance(bankAccount.getBalance() + transaction.getAmount());
+        bankAccountService.update(bankAccount);
+
+        // Returns the response body
+        return ResponseEntity.ok(bankAccount);
+    }
+
+    @PostMapping("/withdrawal/save")
+    @Transactional
+    public ResponseEntity<BankAccount> makeAWithdrawal(@RequestBody DepositDTO depositDTO) throws SQLException, BadRequestException{
+
+        // Get the bank account
+        BankAccount bankAccount = bankAccountService.searchById(depositDTO.getIdAcc()).orElse(null);
+
+        // Create the Transaction object and sets all it's params/values
+        Transaction transaction = new Transaction();
+        transaction.setAmount(depositDTO.getAmount());
+        transaction.setTransactionDate(LocalDateTime.now());
+        transaction.setType(TransactionType.WITHDRAWAL);
+        transaction.setSourceAccount(bankAccount);
+
+        // Process and persist the transaction onto the database
+        transaction = transactionService.save(transaction);
+
+        // Subtract the bank account's balance for the transaction amount, and then update the account's balance afterwards
+        bankAccount.setBalance(bankAccount.getBalance() - transaction.getAmount());
+        bankAccountService.update(bankAccount);
+
+        // Returns the response body
+        return ResponseEntity.ok(bankAccount);
     }
 
     @PostMapping("/transfer/save")

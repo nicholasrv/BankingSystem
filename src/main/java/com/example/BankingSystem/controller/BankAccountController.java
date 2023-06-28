@@ -25,6 +25,7 @@ public class BankAccountController {
     @Autowired
     private UserService userService;
 
+    /// CREATE A NEW ACCOUNT
     @PostMapping("/save")
     public ResponseEntity<?> setupAnAccount(@RequestBody BankAccountDTO bankAccountDTO) throws BadRequestException {
         try {
@@ -41,17 +42,13 @@ public class BankAccountController {
         }
     }
 
-
-
-
-
-
-
     ///UPDATE/PUT
     @PutMapping("/update")
     public ResponseEntity updateAccountDetails(@RequestBody BankAccountDTO bankAccountDTO) throws SQLException {
+        BankAccount idAcc = bankAccountService.searchById(bankAccountDTO.getIdAccount()).orElse(null);
         UserEntity userEntity = userService.searchById(bankAccountDTO.getIdUser()).orElse(null);
-        BankAccount bankAccount = new BankAccount(bankAccountDTO.getAccountNumber(), bankAccountDTO.getBalance(), userEntity, bankAccountDTO.getAccountType());
+        assert idAcc != null;
+        BankAccount bankAccount = new BankAccount(idAcc.getId(), bankAccountDTO.getAccountNumber(), bankAccountDTO.getBalance(), userEntity, bankAccountDTO.getAccountType());
         return ResponseEntity.ok(bankAccountService.update(bankAccount));
     }
 

@@ -82,10 +82,17 @@ public class BankAccountControllerTest {
     public void testUpdateAccountDetails() throws SQLException {
         // Create a BankAccountDTO object with the necessary data
         BankAccountDTO bankAccountDTO = new BankAccountDTO();
+        bankAccountDTO.setIdAccount(3L);
         bankAccountDTO.setAccountNumber("123456789");
         bankAccountDTO.setBalance(1500.0);
         bankAccountDTO.setIdUser(1L);
         bankAccountDTO.setAccountType("savings");
+
+        //Mock the behavior of bankAccountService.searchById() method
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setId(3L);
+        when(bankAccountService.searchById(bankAccountDTO.getIdAccount())).thenReturn(Optional.of(bankAccount));
+
 
         // Mock the behavior of userService.searchById() method
         UserEntity userEntity = new UserEntity();
@@ -94,7 +101,7 @@ public class BankAccountControllerTest {
 
         // Mock the behavior of bankAccountService.update() method
         BankAccount updatedBankAccount = new BankAccount();
-        updatedBankAccount.setId(1L);
+        updatedBankAccount.setId(3L);
         updatedBankAccount.setAccountNumber(bankAccountDTO.getAccountNumber());
         updatedBankAccount.setBalance(bankAccountDTO.getBalance());
         updatedBankAccount.setUser(userEntity);
@@ -112,4 +119,8 @@ public class BankAccountControllerTest {
         Mockito.verify(userService, atLeastOnce()).searchById(anyLong());
         Mockito.verify(bankAccountService, atLeastOnce()).update(ArgumentMatchers.any(BankAccount.class));
     }
+
+
+
+
 }

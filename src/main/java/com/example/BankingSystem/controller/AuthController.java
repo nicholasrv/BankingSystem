@@ -72,13 +72,15 @@ public class AuthController {
         return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);
     }
 
-    @PostMapping("register/admin/")
+    @PostMapping("register/admin")
     public ResponseEntity<String> registerAdmin(@RequestBody RegistrationDTO registrationDTO) {
         if(userRepository.existsByUsername(registrationDTO.getUsername())){
             return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
         }
 
         UserEntity user = new UserEntity();
+        user.setName(registrationDTO.getName());
+        user.setEmail(registrationDTO.getEmail());
         user.setUsername(registrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode((registrationDTO.getPassword())));
 

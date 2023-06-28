@@ -9,10 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankAccountDTO {
-    private Long idAccount;
-    private String accountNumber;
-    private Double balance;
-    private String accountType;
-    private Long idUser;
+public class DepositDTO {
+    public Long idAcc;
+    public Double amount;
+
 }

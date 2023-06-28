@@ -2,7 +2,6 @@ package com.example.BankingSystem.model;
 
 import com.example.BankingSystem.dtos.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,7 +41,7 @@ public class Payment {
 
     public PaymentResponseDTO responseBillingDTO(){
         TransactionBillingDTO transactionBillingDTO = new TransactionBillingDTO(this.transaction.getAmount(), this.transaction.getTransactionDate(), this.transaction.getType());
-        BankAccountDTO bankAccountDTO = new BankAccountDTO(this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType(), this.sourceAccount.getId());
+        BankAccountDTO bankAccountDTO = new BankAccountDTO(this.sourceAccount.getId(), this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType(), this.sourceAccount.getId());
 
         return new PaymentResponseDTO(
                 this.billNumber,
@@ -53,8 +52,8 @@ public class Payment {
 
     public PaymentTransferResponseDTO responseTransferDTO(){
         TransactionTransferDTO transactionTransferDTO = new TransactionTransferDTO(this.transaction.getAmount(), this.transaction.getTransactionDate(), this.transaction.getType());
-        BankAccountDTO sourceAccount = new BankAccountDTO(this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType(), this.sourceAccount.getId());
-        BankAccountDTO destinationAccount = new BankAccountDTO(this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType(), this.sourceAccount.getId());
+        BankAccountDTO sourceAccount = new BankAccountDTO(this.sourceAccount.getId(), this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType(), this.sourceAccount.getId());
+        BankAccountDTO destinationAccount = new BankAccountDTO(this.sourceAccount.getId(), this.sourceAccount.getAccountNumber(), this.sourceAccount.getBalance(), this.sourceAccount.getAccountType(), this.sourceAccount.getId());
 
         return new PaymentTransferResponseDTO(
                 transactionTransferDTO,
